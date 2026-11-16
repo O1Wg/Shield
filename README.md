@@ -14,7 +14,7 @@ Build a web-based notes app with login, where users manage their own notes. Show
 
 ## Tech stack (pick one)
 
-- [ ] Python Flask
+- [X] Python Flask
 - [ ] PHP
 - [ ] Node.js
 - [ ] Any equivalent web framework
