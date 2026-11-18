@@ -1,1 +1,13 @@
+# Please dont remove or modify this file it's important for security reasons
 
+# python virtual environment
+venv/
+
+# python cache files
+__pycache__/
+
+# Database file (test users and password hashes)
+*.db 
+
+# Flask instance folder (local config, secrets)
+instance/
