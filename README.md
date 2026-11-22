@@ -24,8 +24,8 @@ Build a web-based notes app with login, where users manage their own notes. Show
 ## Build checklist
 
 ### 1. Database
-- [ ] `users` table: `user_id`, `username`, `password` (**hashed**)
-- [ ] `notes` table: `note_id`, `user_id` (owner), `title`, `content`
+- [x] `users` table: `user_id`, `username`, `password` (**hashed**)
+- [x] `notes` table: `note_id`, `user_id` (owner), `title`, `content`
 
 ### 2. Login system
 - [ ] Register / login / logout working
