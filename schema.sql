@@ -12,5 +12,6 @@ CREATE TABLE notes (
   user_id INTEGER NOT NULL,
   title TEXT NOT NULL,
   content TEXT NOT NULL,
+  created_at TEXT DEFAULT CURRENT_TIMESTAMP,
   FOREIGN KEY (user_id) REFERENCES users (id)
 );
