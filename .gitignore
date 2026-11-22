@@ -2,19 +2,15 @@
 
 # python virtual environment
 venv/
-.venv/
 
 # python cache files
 __pycache__/
 
 # Database file (test users and password hashes)
-*.db
+*.db 
 
 # Flask instance folder (local config, secrets)
 instance/
 
 # Security logs
 *.log
-
-# environment variables / secrets
-.env

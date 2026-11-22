@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block title %}403 Forbidden - Shield Notes{% endblock %}
+
+{% block content %}
+<div style="text-align: center; padding: 30px 10px;">
+    <h1 style="font-size: 3.5rem; color: #dc2626; margin: 0;">403</h1>
+    <h2 style="margin-top: 10px;">Access Denied</h2>
+    <p style="color: #475569; margin-bottom: 25px;">
+        You do not have permission to view or delete this resource. This unauthorized attempt has been logged by the server.
+    </p>
+    <a href="/notes" class="btn btn-primary">Back to My Notes</a>
+</div>
+{% endblock %}

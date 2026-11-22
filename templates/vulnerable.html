@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block title %}Vulnerable XSS Demo - Shield Notes{% endblock %}
+
+{% block content %}
+<div class="alert alert-danger">
+    <strong>Local Educational Demo Only:</strong> This page deliberately disables Jinja2 auto-escaping using <code>| safe</code> to demonstrate a <strong>Stored XSS</strong> vulnerability.
+</div>
+
+<h2>Notes (Vulnerable View)</h2>
+<p>If any stored note contains HTML or JavaScript (e.g., <code>&lt;script&gt;alert('XSS')&lt;/script&gt;</code>), the browser will execute it below.</p>
+
+{% if notes %}
+    {% for note in notes %}
+    <div style="border: 1px solid #fca5a5; border-radius: 6px; padding: 15px; margin-bottom: 12px; background: #fff1f2;">
+        <!-- Deliberately vulnerable output without encoding -->
+        <h4 style="margin-top: 0;">{{ note.title | safe }}</h4>
+        <div>{{ note.content | safe }}</div>
+    </div>
+    {% endfor %}
+{% else %}
+    <p style="color: #64748b;">No notes found. Add a note in "My Notes (Secure)" first, then return here to test.</p>
+{% endif %}
+
+<a href="/notes" class="btn btn-primary">Return to Secured Notes</a>
+{% endblock %}
