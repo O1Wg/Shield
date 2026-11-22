@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block title %}Login - Shield Notes{% endblock %}
+
+{% block content %}
+<h2>Login</h2>
+<p>Sign in to access your secure notes.</p>
+
+<!-- Login Form -->
+<form method="POST" action="/login">
+    <label for="username">Username</label>
+    <input type="text" id="username" name="username" required maxlength="50" placeholder="Enter your username">
+
+    <label for="password">Password</label>
+    <input type="password" id="password" name="password" required maxlength="100" placeholder="Enter your password">
+
+    <button type="submit" class="btn btn-primary">Login</button>
+    <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+</form>
+
+<p style="margin-top: 20px;">
+    Don't have an account? <a href="/register">Register here</a>
+</p>
+{% endblock %}

@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block title %}Edit Note - Shield Notes{% endblock %}
+
+{% block content %}
+<div style="margin-bottom: 20px;">
+    <a href="/notes/{{ note.note_id }}" class="btn btn-primary" style="background-color: #475569;">&larr; Cancel</a>
+</div>
+
+<h2>Edit Note</h2>
+
+<form method="POST" action="/notes/{{ note.note_id }}/edit">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+
+    <label for="title">Note Title</label>
+    <input type="text" id="title" name="title" required maxlength="100" value="{{ note.title }}">
+
+    <label for="folder_id">Folder (Optional)</label>
+    <select id="folder_id" name="folder_id" style="width: 100%; padding: 10px; margin: 8px 0 16px; border: 1px solid #cbd5e1; border-radius: 5px;">
+        <option value="">No Folder</option>
+        {% for folder in folders %}
+        <option value="{{ folder.folder_id }}" {% if note.folder_id == folder.folder_id %}selected{% endif %}>
+            {{ folder.name }}
+        </option>
+        {% endfor %}
+    </select>
+
+    <label for="content">Content</label>
+    <textarea id="content" name="content" rows="6" required maxlength="2000">{{ note.content }}</textarea>
+
+    <button type="submit" class="btn btn-primary">Update Note</button>
+</form>
+{% endblock %}

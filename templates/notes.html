@@ -1,0 +1,113 @@
+{% extends "base.html" %}
+
+{% block title %}My Notes - Shield Notes{% endblock %}
+
+{% block content %}
+<style>
+    .notes-layout { display: flex; gap: 20px; align-items: flex-start; }
+    .sidebar { width: 210px; flex-shrink: 0; border-right: 1px solid #e2e8f0; padding-right: 15px; }
+    .main-area { flex: 1; min-width: 0; }
+    .folder-list { list-style: none; padding: 0; margin: 10px 0 15px; }
+    .folder-item { display: flex; justify-content: space-between; align-items: center; padding: 6px 8px; border-radius: 5px; margin-bottom: 4px; }
+    .folder-item.active { background-color: #e0f2fe; font-weight: bold; }
+    .folder-item a { text-decoration: none; color: #1e293b; flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .search-bar { display: flex; gap: 8px; margin-bottom: 20px; }
+    .search-bar input { margin: 0; flex: 1; }
+    .note-card { border: 1px solid #e2e8f0; border-radius: 6px; padding: 15px; margin-bottom: 12px; background: #f8fafc; }
+    .note-card h4 { margin: 0 0 8px; color: #0f172a; }
+    .note-content { white-space: pre-wrap; word-break: break-word; color: #334155; margin-bottom: 12px; }
+    .note-meta { display: flex; justify-content: space-between; align-items: center; font-size: 0.85rem; color: #64748b; }
+    .btn-sm { padding: 5px 10px; font-size: 0.82rem; }
+</style>
+
+<div class="notes-layout">
+    <!-- Folders Sidebar -->
+    <aside class="sidebar">
+        <h3 style="margin-top: 0;">Folders</h3>
+        <ul class="folder-list">
+            <li class="folder-item {% if active_folder_id is none %}active{% endif %}">
+                <a href="/notes">All Notes</a>
+            </li>
+            {% for folder in folders %}
+            <li class="folder-item {% if active_folder_id == folder.folder_id %}active{% endif %}">
+                <a href="/notes?folder_id={{ folder.folder_id }}">{{ folder.name }}</a>
+                <form method="POST" action="/folders/{{ folder.folder_id }}/delete" style="margin: 0;">
+                    <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+                    <button type="submit" class="btn btn-danger btn-sm" title="Delete folder" style="padding: 2px 6px;">x</button>
+                </form>
+            </li>
+            {% endfor %}
+        </ul>
+
+        <!-- Create Folder Form -->
+        <form method="POST" action="/folders/add">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+            <input type="text" name="name" required maxlength="40" placeholder="New folder name..." style="margin-bottom: 8px;">
+            <button type="submit" class="btn btn-primary btn-sm" style="width: 100%;">+ Add Folder</button>
+        </form>
+    </aside>
+
+    <!-- Main Notes Area -->
+    <section class="main-area">
+        <h2 style="margin-top: 0;">My Secure Notes</h2>
+
+        <!-- Secure Search Form (Parameterized LIKE query on server) -->
+        <form method="GET" action="/notes" class="search-bar">
+            {% if active_folder_id is not none %}
+                <input type="hidden" name="folder_id" value="{{ active_folder_id }}">
+            {% endif %}
+            <input type="text" name="q" value="{{ search_query }}" maxlength="100" placeholder="Search your notes...">
+            <button type="submit" class="btn btn-primary">Search</button>
+            {% if search_query %}
+                <a href="/notes{% if active_folder_id is not none %}?folder_id={{ active_folder_id }}{% endif %}" class="btn" style="background: #e2e8f0; color: #1e293b;">Clear</a>
+            {% endif %}
+        </form>
+
+        <!-- Create Note Form -->
+        <form method="POST" action="/notes/add" style="margin-bottom: 25px; padding-bottom: 20px; border-bottom: 1px solid #e2e8f0;">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+
+            <label for="title">Note Title</label>
+            <input type="text" id="title" name="title" required maxlength="100" placeholder="Enter note title (max 100 chars)">
+
+            <label for="folder_id">Folder (Optional)</label>
+            <select id="folder_id" name="folder_id" style="width: 100%; padding: 10px; margin: 8px 0 16px; border: 1px solid #cbd5e1; border-radius: 5px;">
+                <option value="">No Folder</option>
+                {% for folder in folders %}
+                <option value="{{ folder.folder_id }}" {% if active_folder_id == folder.folder_id %}selected{% endif %}>
+                    {{ folder.name }}
+                </option>
+                {% endfor %}
+            </select>
+
+            <label for="content">Content</label>
+            <textarea id="content" name="content" rows="4" required maxlength="2000" placeholder="Write your note here (max 2000 chars)..."></textarea>
+
+            <button type="submit" class="btn btn-primary">Save Note</button>
+        </form>
+
+        <!-- Notes List (Rendered safely with Jinja2 auto-escaping) -->
+        {% if notes %}
+            {% for note in notes %}
+            <div class="note-card">
+                <h4>{{ note.title }}</h4>
+                <div class="note-content">{{ note.content }}</div>
+                <div class="note-meta">
+                    <span>Created: {{ note.created_at }}</span>
+                    <div style="display: flex; gap: 8px;">
+                        <a href="/notes/{{ note.note_id }}" class="btn btn-primary btn-sm">View</a>
+                        <a href="/notes/{{ note.note_id }}/edit" class="btn btn-sm" style="background-color: #f59e0b; color: white;">Edit</a>
+                        <form method="POST" action="/notes/{{ note.note_id }}/delete" style="margin: 0;">
+                            <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+                            <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        {% else %}
+            <p style="color: #64748b;">No notes found. Create your first note above!</p>
+        {% endif %}
+    </section>
+</div>
+{% endblock %}
