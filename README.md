@@ -12,51 +12,48 @@ Build a web-based notes app with login, where users manage their own notes. Show
 
 ---
 
-## Tech stack (pick one)
+## Tech stack
 
 - [X] Python Flask
-- [ ] PHP
-- [ ] Node.js
-- [ ] Any equivalent web framework
 
 ---
 
 ## Build checklist
 
 ### 1. Database
-- [ ] `users` table: `user_id`, `username`, `password` (**hashed**)
-- [ ] `notes` table: `note_id`, `user_id` (owner), `title`, `content`
+- [x] `users` table: `user_id`, `username`, `password` (**hashed**)
+- [x] `notes` table: `note_id`, `user_id` (owner), `title`, `content`
 
 ### 2. Login system
-- [ ] Register / login / logout working
-- [ ] Passwords hashed (never stored in plain text)
+- [x] Register / login / logout working
+- [x] Passwords hashed (never stored in plain text)
 
 ### 3. Notes features (logged-in users only)
-- [ ] Add a new note
-- [ ] View **their own** notes
-- [ ] Delete **their own** notes
+- [x] Add a new note
+- [x] View **their own** notes
+- [x] Delete **their own** notes
 
 ### 4. Stored XSS demo
-- [ ] Make a separate, deliberately vulnerable **local** version (or explain it conceptually)
-- [ ] Use a **harmless** payload only, e.g. a JavaScript `alert()`
-- [ ] Show the same input being stored and executed in the vulnerable version
+- [x] Make a separate, deliberately vulnerable **local** version (or explain it conceptually)
+- [x] Use a **harmless** payload only, e.g. a JavaScript `alert()`
+- [x] Show the same input being stored and executed in the vulnerable version
 
 ### 5. Security in the real (secured) app
-- [ ] Output encoding / template auto-escaping — notes show as plain text, no HTML/JS runs
-- [ ] Password hashing
-- [ ] Input validation — required fields + length limits
-- [ ] Parameterized queries (prepared statements) for **every** DB operation
+- [x] Output encoding / template auto-escaping — notes show as plain text, no HTML/JS runs
+- [x] Password hashing
+- [x] Input validation — required fields + length limits
+- [x] Parameterized queries (prepared statements) for **every** DB operation
 
 ### 6. Access control
-- [ ] Only logged-in users can reach any notes page
-- [ ] Users can only view/delete their own notes
-- [ ] Ownership checked **on the server** for every view and delete request (not just hidden in the UI)
+- [x] Only logged-in users can reach any notes page
+- [x] Users can only view/delete their own notes
+- [x] Ownership checked **on the server** for every view and delete request (not just hidden in the UI)
 
 ### 7. Logging
-- [ ] Log successful logins
-- [ ] Log failed logins
-- [ ] Log denied attempts to view/delete another user's note
-- [ ] Logs must **NOT** contain passwords or note content
+- [x] Log successful logins
+- [x] Log failed logins
+- [x] Log denied attempts to view/delete another user's note
+- [x] Logs must **NOT** contain passwords or note content
 
 ---
 
