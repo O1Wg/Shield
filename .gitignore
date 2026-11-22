@@ -13,8 +13,8 @@ __pycache__/
 # Flask instance folder (local config, secrets)
 instance/
 
-# storing logs
+# Security logs
 *.log
 
-# virtual environment
+# environment variables / secrets
 .env
