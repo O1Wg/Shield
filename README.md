@@ -60,27 +60,27 @@ Build a web-based notes app with login, where users manage their own notes. Show
 ## Report (3–5 pages, using the course template)
 
 Sections:
-- [ ] Cover page filled in (names, IDs, CRN)
-- [ ] Stored XSS explanation
-- [ ] Security implementation details
-- [ ] Testing results
-- [ ] Conclusion
+- [x] Cover page filled in (names, IDs, CRN)
+- [x] Stored XSS explanation
+- [x] Security implementation details
+- [x] Testing results
+- [x] Conclusion
 
 Screenshots to take:
-- [ ] Successful login
-- [ ] Successful note creation and display
-- [ ] XSS firing in the local vulnerable example
-- [ ] Same input displayed safely in the secured system
-- [ ] Denied access to another user's note
+- [x] Successful login
+- [x] Successful note creation and display
+- [x] XSS firing in the local vulnerable example
+- [x] Same input displayed safely in the secured system
+- [x] Denied access to another user's note
 
 ---
 
 ## Submission
 
-- [ ] Report as **Word (.docx)** and **PDF** — two separate files, not compressed
-- [ ] Source code (zipped folder)
-- [ ] Upload via the Blackboard assignment folder (group leader only)
-- [ ] Double-check both files uploaded correctly
+- [x] Report as **Word (.docx)** and **PDF** — two separate files, not compressed
+- [x] Source code (zipped folder)
+- [x] Upload via the Blackboard assignment folder (group leader only)
+- [x] Double-check both files uploaded correctly
 
 > ⚠️ The instructions say files "must not be in compressed format," but the deliverables list asks for source code as a zipped folder. Ask the instructor which applies to the code before submitting.
 
